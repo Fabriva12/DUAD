@@ -23,7 +23,7 @@ def menu_action():
         if chose_main_action == "5":
             export_csv(total_student)
         if chose_main_action == "6":
-            six = import_csv()
+            total_student= import_csv()
         if chose_main_action == "7":
             print("Saliendo del programa, Hasta luego")
             break

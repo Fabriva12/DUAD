@@ -4,7 +4,9 @@ def import_csv():
         with open ("C:\\Users\\Usuario\\Desktop\\estudiantes.csv", "r", encoding= "utf-8") as file:
             reader = csv.DictReader(file)
             for row in reader:
-                print(row)
+                total_student = list(reader)
+                print("Se ha importado con éxito")
+                return total_student
     except FileNotFoundError:
         print("No has creado un archivo csv previamente")
 
