@@ -75,7 +75,12 @@ def total_average(total_student):
     contador= 0
     all_students_average= 0
     for i in total_student:
-        all_students_average += i["Promedio"]
+        average_float = float(i["Promedio"])
+        all_students_average += average_float
         contador += 1
-    all_students_average = all_students_average / contador
-    print(f"{all_students_average}")
+    if contador > 0:
+        all_students_average = all_students_average / contador
+        print(f"{all_students_average}")
+    else:
+        print("No hay estudiantes en la lista")
+        
