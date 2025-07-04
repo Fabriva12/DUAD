@@ -1,30 +1,30 @@
 class Animal:
     def move(self):
-        print("Puede moverse")
+        print("Can move")
 
 class Fly(Animal):
     def fly(self):
-        print("Puede volar")
+        print("Can fly")
 
 class Walk(Animal):
     def walk(self):
-        print("Puede caminar")
+        print("Can walk")
 
 class Swim(Animal):
     def swim(self):
-        print("Puede nadar")
+        print("Can swim")
 
 class Duck(Swim, Walk, Fly):
     def __init__(self):
-        print("Nació un pato")
+        print("Born a duck")
 
 class Turtle(Swim, Walk):
     def __init__(self):
-        print("Nació una tortuga")
+        print("Born a turtle")
 
 class Parrot(Walk, Fly):
     def __init__(self):
-        print("Nacio un loro")
+        print("Born a parrot")
 
 
 
