@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 sg.theme('Material2') 
-from Logica import FinanceManager
+from Logica import FinanceManager, window_create_and_save_movement, window_create_and_save_category
 from Persistencia_de_datos import save_category_csv, save_movement_csv, charge_category_csv, charge_movements_csv
 
 def category_window(manager):
@@ -17,13 +17,11 @@ def category_window(manager):
         if event == "Agregar":
             name= values["nombre"]
             if name:
-                manager.new_category(name)
-                save_category_csv(manager.category)
-                sg.popup("Categoría agregada.")
+                name = values["nombre"]
+            new_category = window_create_and_save_category(manager, name)
+            if new_category:
                 break
-            else:
-                sg.popup_error("El nombre no puede estar vacío.")
-    window.close() 
+    window.close()
 
 def movement_window(manager, type):
     if not manager.category:
@@ -43,20 +41,14 @@ def movement_window(manager, type):
         if event in (sg.WINDOW_CLOSED, "Cancelar"):
             break
         if event == "Guardar":
-            try:
-                title = values["titulo"]
-                amount = float(values["monto"])
-                category = values["categoria"]
-                if not title or not category:
-                    sg.popup_error("Todos los campos son obligatorios.")
-                else:
-                    manager.new_movement(category,title,type, amount)
-                    save_movement_csv(manager.movement)
-                    sg.popup(f"{type} agregado.")
-                    break
-            except ValueError:
-                sg.popup_error("El monto debe ser un número.")
-    window.close()
+
+            title = values["titulo"]
+            amount = values["monto"]
+            category = values["categoria"]
+
+            new_movement= window_create_and_save_movement(manager, title, amount, category, type)
+            if new_movement:
+                break
 
 manager= FinanceManager()
 manager.category = charge_category_csv()
